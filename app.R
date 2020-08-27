@@ -1,7 +1,6 @@
-#online app; first only averages
-#install.packages(c('gtools','grid','gtable','ggplot2','shiny','shinyWidgets'), repos='https://cloud.r-project.org')
-#setwd("~/Documents/OneDrive/OneDrive - University of North Carolina at Chapel Hill/Paper/Online_Resource")
 library(rsconnect)
+library(base)
+library(utils)
 library(gtools)
 library(grid)
 library(gtable)
@@ -18,19 +17,21 @@ library(gridBase)
 library(gridExtra)
 
 
-load('scShinyapp.RData')
+load('scShinyapp081720.RData')
 
 
 ui <- fluidPage(
     tags$h1("Single-cell spinal cord gene database"),
+    tags$h2('For further details, see:'),
+    tags$h3('Niehaus et al (2020) Border-associated macrophages resolve pain hypersensitivity after tissue injury, submitted.'),
     setBackgroundColor("aliceblue"),
     br(),
     sidebarLayout(position="left",sidebarPanel(
-    searchInput(
-      inputId = "search", label = "Gene of interest (case sensitive)",
-      placeholder = "",
-      btnSearch = icon("search"),
-      btnReset = icon("remove"),
+    textInput(
+      inputId = "search", label = "Gene of interest",
+      value='Gad2',
+      #btnSearch = icon("search"),
+      #btnReset = icon("remove"),
       width = "450px"
     )
     ),mainPanel(
@@ -41,10 +42,10 @@ ui <- fluidPage(
 )
 server <- function(input, output, session) {
     #df1=read.table('ShamClusterAverages.txt',header=T,sep='\t',row.names=1)
-    df1=data.frame(fread('ShamClusterAverages.txt',header=T))
+   df1=data.frame(fread('ShamClusterAverages.txt',header=T))
     rownames(df1)=df1$V1
     df1$V1=NULL
-    #df2=read.table('SNIClusterAverages.txt',header=T,sep='\t',row.names=1)
+   #df2=read.table('SNIClusterAverages.txt',header=T,sep='\t',row.names=1)
     df2=data.frame(fread('SNIClusterAverages.txt',header=T))
     rownames(df2)=df2$V1
     df2$V1=NULL
@@ -74,12 +75,13 @@ server <- function(input, output, session) {
     output$P2 <- renderPlot({
       input$search
       if(input$search==""){}
-      else{
-      propbar_lattice(gene=input$search,sham=shamprop(),sni=sniprop())}
+      else if (toupper(input$search) %in% rownames(df1)){
+      propbar_lattice(gene=input$search,sham=shamprop(),sni=sniprop())
+        write(input$search,'inputgenes.txt',append=T)}
+      else {
+        propbar_lattice(gene=input$search,sham=shamprop(),sni=sniprop())
+      }
     })}
 
 
 shinyApp(ui = ui, server = server)
-
-
-## End(Not run)
