@@ -1,3 +1,7 @@
+#this Rscript is placed in the directory alongside an RData object that contains average gene expression and cell proportion expression data used to launch the shiny application 
+#for viewing data at zylka-lab.med.unc.edu/spinalcord
+
+
 library(rsconnect)
 library(base)
 library(utils)
