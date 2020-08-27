@@ -36,54 +36,54 @@ function(gene,sham,sni) {
   my.settings <- noMargins(list(
     par.main.text = list(font = 2, # make it bold
                          hjust =.7 , vjust=.5)))
-                        # x = grid::unit(15, "mm"))))
+  
+  #trellis.par.set(list(axis.text))
   p1.2=barchart(value~cluster,data=olig,groups=condition,newpage=FALSE,
                 scales=list(x=list(rot=45,cex=0.8),family='sans'),
                 ylim=c(datamin,datamax),col=c('grey','magenta2'),
-                ylab='% Expr',main='Oligodendrocytes', 
+                ylab='Avg Expr',main='Oligodendrocytes', 
                 key=list(text=list(as.character(unique(olig$condition)),
                                    family='sans'),space='right',
                          points=list(col=c('grey','magenta2'),pch=15,cex=2)),par.settings=my.settings)
-
   p2.2=barchart(value~cluster,data=vasc,groups=condition,newpage=FALSE,
                 scales=list(x=list(rot=45,cex=0.8),family='sans'),
                 ylim=c(datamin,datamax),col=c('grey','firebrick3'),
-                ylab='% Expr',main='Vascular cells', 
+                ylab='Avg Expr',main='Vascular cells', 
                 key=list(text=list(as.character(unique(olig$condition)),
                                    family='sans'),space='right',
                          points=list(col=c('grey','firebrick3'),pch=15,cex=2)),par.settings=my.settings)
   p3.2=barchart(value~cluster,data=neur,groups=condition,
                 scales=list(x=list(rot=45,cex=0.8),family='sans'),
                 ylim=c(datamin,datamax),col=c('grey','royalblue'),
-                ylab='% Expr',main='Neurons', 
+                ylab='Avg Expr',main='Neurons', 
                 key=list(text=list(as.character(unique(olig$condition)),
                                    family='sans'),space='right',
                          points=list(col=c('grey','royalblue'),pch=15,cex=2)),par.settings=my.settings)
   p4.2=barchart(value~cluster,data=immu,groups=condition,
                 scales=list(x=list(rot=45,cex=0.8),family='sans'),
                 ylim=c(datamin,datamax),col=c('grey','orange3'),
-                ylab='% Expr',main='Immune cells', 
+                ylab='Avg Expr',main='Immune cells', 
                 key=list(text=list(as.character(unique(olig$condition)),
                                    family='sans'),space='right',
                          points=list(col=c('grey','orange3'),pch=15,cex=2)),par.settings=my.settings)
   p5.2=barchart(value~cluster,data=schw,groups=condition,
                 scales=list(x=list(rot=45,cex=0.8),family='sans'),
                 ylim=c(datamin,datamax),col=c('grey','olivedrab'),
-                ylab='% Expr',main='Schwann cells', 
+                ylab='Avg Expr',main='Schwann cells', 
                 key=list(text=list(as.character(unique(olig$condition)),
                                    family='sans'),space='right',
                          points=list(col=c('grey','olivedrab'),pch=15,cex=2)),par.settings=my.settings)
   p6.2=barchart(value~cluster,data=astr,groups=condition,
                 scales=list(x=list(rot=45,cex=0.8),family='sans'),
                 ylim=c(datamin,datamax),col=c('grey','turquoise4'),
-                ylab='% Expr',main='Astrocytes/Progenitors', 
+                ylab='Avg Expr',main='Astrocytes/Progenitors', 
                 key=list(text=list(as.character(unique(olig$condition)),
                                    family='sans'),space='right',
                          points=list(col=c('grey','turquoise4'),pch=15,cex=2)),par.settings=my.settings)
   p7.2=barchart(value~cluster,data=opc,groups=condition,
                 scales=list(x=list(rot=45,cex=0.8),family='sans'),
                 ylim=c(datamin,datamax),col=c('grey','springgreen4'),
-                ylab='% Expr',main='Committed Oligo.', 
+                ylab='Avg Expr',main='Committed Oligo.', 
                 key=list(text=list(as.character(unique(olig$condition)),
                                    family='sans'),space='right',
                          points=list(col=c('grey','springgreen4'),pch=15,cex=2)),par.settings=my.settings)
@@ -98,9 +98,7 @@ function(gene,sham,sni) {
     layout.heights=list(bottom.padding=list(x=0), top.padding=list(x=0)),
     layout.widths=list(left.padding=list(x=0), right.padding=list(x=0))
   )
-  #p1.2title=textGrob('oligo',just=c('left','top'))
   grid.newpage()
-  #gt=gTree(c(p1.2title,as.grob(p1.2)))
   gl=list(as.grob(p1.2),as.grob(p2.2),as.grob(p3.2),as.grob(p4.2),as.grob(p5.2),as.grob(p6.2),as.grob(p7.2))
-  grid.arrange(grobs=gl,layout_matrix=hlay,top=textGrob(paste0('% cells expressing ',gene,'\n'),gp=gpar(fontface="bold",fontsize=24)))
+  grid.arrange(grobs=gl,layout_matrix=hlay,top=textGrob(paste0('Avg ',gene,' expression\n'),gp=gpar(fontface="bold",fontsize=24)))
 }
