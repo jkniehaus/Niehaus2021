@@ -28,9 +28,6 @@ SISNIdge = read.table("SISNIdge.txt",header=T,sep="\t",row.names=1)
 #for 0 padding
 SISNIdge[is.na(SISNIdge)] <- 0
 print(dim(SISNIdge))
-#remove all SNI04 cells since they're dogshit
-#again <- SISNIdge[, -grep("SNI04", colnames(SISNIdge))]
-#SISNIdge <- again
 
 
 mt.genes = grep("mt-", rownames(SISNIdge), value = TRUE)
