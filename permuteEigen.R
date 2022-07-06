@@ -1,14 +1,9 @@
 #####################################
 # Cell-wise permutation to determine number of significant eigenvalues and therefore significant PCs to look at
-# Run on cluster, took just over a minute per shuffling for this dataset
 #####################################
 #this scale.data file needs to be in the directory directory 
 #the following code will be copied made into an R file using 'nano'. e.g. 
-# <- )
-#nano permuteEigen.R
-#paste the code
-#cntrl +x to save and exit
-# note the following was slightly changed based on what the file was named as (in this case "dsq.SISNI.scale.data.txt")
+
 dsq.SISNI.scale.data <- read.table(dsq.SISNI.scale.data.txt, header=T, sep="\t",row.names=1)
 library(gmodels)
 nperm=1000 #can be adjusted or run in smaller permutation blocks
@@ -40,6 +35,12 @@ for (i in 1:nperm) {
   print(max(ev))
 }
 print(randEV)
+load('thruPreprocessing.RData')
+
 
 
 print(max(randEV)) #this number will be input for next 
+maxpca=length(dsq.SISNI@pca.eigenvalues$ev[dsq.SISNI@pca.eigenvalues$ev>max(randEV)]) #maxpca is 60 in this instance
+#for tsne in python, write table of first 60 PCs
+                       
+write.table(dsq.SISNI@pca.scores[,1:maxpca],"SISNIcsc_top11pcs.txt",quote=F,sep="\t",col.names=NA)
