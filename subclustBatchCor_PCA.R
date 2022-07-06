@@ -88,3 +88,5 @@ data.plot = dsq.SNISham@pca.scores
 data.plot$group = dsq.SNISham@group
 write.table(dsq.SISNI@scale.data,'subclust1.dsq.SISNI.scale.data.txt',quote=F,sep='\t',col.names=NA)
 save.image(file='batch_200pca_3daysbc.RData')
+
+#for each subclustering iteration, it is necessary to determine the number of optimal PCs (using permuteEigen.R; permutations = 500)
