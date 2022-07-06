@@ -101,6 +101,7 @@ dsq.SISNI=doPCA(dsq.SISNI,pcs.store=120)
 #good time to save workspace
 
 write.table(dsq.SISNI@scale.data,'dsq.SISNI.scale.data.txt',quote=F,sep='\t',col.names=NA)
+save.image('thruPreprocessing.RData')
 #####################################
 # Cell-wise permutation to determine number of significant eigenvalues and therefore significant PCs to look at
 # Run on cluster, took just over a minute per shuffling for this dataset
@@ -199,7 +200,8 @@ for (i in 1:length(table(ident.louvain))) {
 #End of initial clustering. Next steps were to perform a second round of clustering on each initial cluster in order to identify populations with better acuity.
 #Aim is to fill dsq.SISNI@subclust and dsq.SISNI@subgroup objects with new IDs.
 #dataframe .txt files of each cluster (e.g. dsq.SISNI@count.data[,which(dsq.SISNI@group==1)]) were generated to run through the above clustering pipeline again.
-#New running subgroup/subclust IDs were generated from each initial cluster. For example, initial cluster 1 became four clusters and were named 1, 2, 3, 4. Initial cluster 2 became 
+#New running subgroup/subclust IDs were generated from each initial cluster. For example, initial cluster 1 became four clusters and were named 1, 2, 3, 4. Initial cluster 2 became 3 clusters and were named 5, 6, and 7.
+#70 clusters 
 ################################################################
 
 
