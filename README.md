@@ -10,7 +10,7 @@ This is a repository for code used in the publication Niehaus et al. 2021 entitl
   
   A general pipeline for single-cell RNA-seq (scRNAseq) dataprocessing and the source file used to generate plots; adapted from Loo et al. 2019 and Shekhar et al.2018.
   * `class042518.R` - source file for plotting, data manipulation, testing, and clustering functions.
-  * `SI_SNI_scRNAseqpipeline.R` - a step by step guide outlining the first round of clustering beginning with a gene expression matrix (available at GEO GSE134003). This pipeline was adapted from the above publications, whose pipelines are found at 'https://github.com/jeremymsimon/MouseCortex' and 'https://github.com/broadinstitute/BipolarCell2016'. Clustering began with with an initial round followed by subclustering of each initial cluster.
+  * `scRNAseq` - a step by step guide to two rounds of clustering from initial genes x cells dataframe (available at GEO GSE134003). This pipeline was adapted from the above publications, whose pipelines are found at 'https://github.com/jeremymsimon/MouseCortex' and 'https://github.com/broadinstitute/BipolarCell2016'. Clustering began with with an initial round followed by subclustering of each initial cluster.
   
   
 Example scripts of immunofluorescence analyses via imageJ (Fiji).
